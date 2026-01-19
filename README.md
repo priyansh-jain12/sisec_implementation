@@ -218,25 +218,24 @@ Modify the `calculate_distribution_slots()` method:
 **Location:** `ConfigurationManager` class `__init__` method
 
 **What you need to do:**
-Update the default configuration dictionary:
+Update the imss_config collection document:
 
 1. **Expand distribution arrays to 4 elements:**
    - `distribution_good`: Add 4th value for SISEC percentage
-   - `distribution_normal`: Add 4th value for SISEC percentage
-   - `distribution_bad`: Add 4th value for SISEC percentage
-   - `distribution_null`: Add 4th value for SISEC percentage
 
 2. **Add SISEC enable flag:**
-   - Add `"sisec_enabled": True` to the config
+   - Add `"sisec_enabled": True` to the document
 
 **Reference:** Look at the existing default_config dictionary. See how `iad_enabled`, `iad2_enabled`, `master_enabled` are set.
 
 **Recommendation for distribution percentages:**
 - All percentages in each array should sum to 100
-- Start conservative: give SISEC smaller percentage initially
-- Example: `distribution_good: [45, 35, 15, 5]` (5% to SISEC when performing well)
+- Start conservative: give SISEC smaller percentage initially after that we will increase it.
+- Example: `distribution_good: [40, 25, 25, 10]` (5% to SISEC when performing well)
 
-**Arrays represent:** [IAD2_%, IAD_%, MASTER_%, SISEC_%]
+**Arrays represent:** 
+[MASTER_%, "_", IAD2_%, SISEC_%]
+IAD% = BATCH_SIZE - (MASTER_% + IAD2_% + SISEC_%)
 
 ---
 
